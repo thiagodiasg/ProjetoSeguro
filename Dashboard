@@ -1,0 +1,130 @@
+#dashboard
+from tkinter import*
+def telaLogin():
+    print("telalogin")
+
+def cadastro():
+    print("cadastro")
+    print("pedo é gay")
+def orcamentos():
+    print("dashboard")
+    global janela
+    janela.destroy()
+    janela = Tk()
+    janela['bg'] = 'gray'
+    lb1 = Label(janela, width = 30 , text =  "Você pode criar um Orçamento novo ou \n consultar Orçamentos Anteriores", foreground = "white", bg = "gray")
+    bt1 = Button(janela, width=20, text="Novo Orçamento", font="MalgunGothic 9 bold", bg='white', command=novoOrcamento)
+    bt2 = Button(janela, width=20, text="Orçamentos", font="MalgunGothic 9 bold", bg='white', command=consulta)
+    bt3 = Button(janela, width=20, text="Voltar", font="MalgunGothic 9 bold", bg='white',command=dashBoard)
+    bt1.place(x=25, y=50)
+    bt2.place(x=25, y=90)
+    bt3.place(x=25, y=130)
+    lb1.place(x = 25, y = 10 )
+    janela.geometry('300x300+500+100')
+    janela.mainloop()
+def consulta():
+    print("usuarios")
+    global janela
+    janela.destroy()
+    janela = Tk()
+    janela['bg'] = 'gray'
+    lb1 = Label(janela, width=40, text="Buscar editar ou deletar um Orçamento feito", foreground="white", bg="gray")
+    bt1 = Button(janela, width=20, text="Buscar", font="MalgunGothic 9 bold", bg='white',command=updateUsuario)
+    bt2 = Button(janela, width=20, text="Editar", font="MalgunGothic 9 bold", bg='white', command=deleteUsuario)
+    bt3 = Button(janela, width=20, text="Deletar", font="MalgunGothic 9 bold", bg='white', command=dashBoard)
+    bt4 = Button(janela, width=20, text="Voltar", font="MalgunGothic 9 bold", bg='white', command=orcamentos)
+    bt1.place(x=40, y=50)
+    bt2.place(x=40, y=90)
+    bt3.place(x=40, y=130)
+    bt4.place(x=40,y = 170)
+    lb1.place(x=15, y=10)
+    janela.geometry('300x300+500+100')
+def usuarios():
+    print("usuarios")
+    global janela
+    janela.destroy()
+    janela = Tk()
+    janela['bg'] = 'gray'
+    lb1 = Label(janela, width=30, text="Você pode criar um Orçamento ou\n editar seus Dados de Usuario", foreground="white", bg="gray")
+    bt1 = Button(janela, width=20, text="Editar seus Dados", font="MalgunGothic 9 bold", bg='white', command=updateUsuario)
+    bt2 = Button(janela, width=20, text="Deletar Usuário", font="MalgunGothic 9 bold", bg='white', command=deleteUsuario)
+    bt3 = Button(janela, width=20, text="Voltar", font="MalgunGothic 9 bold", bg='white', command = dashBoard)
+    bt1.place(x=40, y=50)
+    bt2.place(x=40, y=90)
+    bt3.place(x=40, y=130)
+    lb1.place(x=15, y=10)
+    janela.geometry('300x300+500+100')
+
+def login():
+    print("login")
+
+def dashBoard():
+    print("novoOrçameto")
+    global janela
+    janela.destroy()
+    janela = Tk()
+
+    janela['bg'] = 'gray'
+    lb1 = Label(janela, width=30, text="Você pode gerenciar Orçamentos ou\n editar seus Dados de Usuario", foreground = "white", bg = "gray")
+    bt1 = Button(janela, width=20, text="Orçamentos", font="MalgunGothic 9 bold", bg='white', command=orcamentos)
+    bt2 = Button(janela, width=20, text= "Usuarios", font="MalgunGothic 9 bold", bg='white', command=usuarios)
+    bt3 = Button(janela, width=20, text="Logout", font="MalgunGothic 9 bold", bg='white', command=login) 
+    bt1.place(x=40, y=50)
+    bt2.place(x=40, y=90)
+    bt3.place(x=40, y=130)
+    lb1.place(x=15, y=10)
+    janela.geometry('300x300+500+100')
+
+
+
+def consultarOrcamento():
+    print("consultarOrçamento")
+
+def updateOrcamento():
+    print("updateOrçamento")
+
+def novoOrcamento():
+    print("novoOrçameto")
+    global janela
+    janela.destroy()
+    janela = Tk()
+    janela['bg'] = 'gray'
+    lb1 = Label(janela, width=30, text="Escolha o tipo de veículo", foreground = "white", bg = "gray")
+    bt1 = Button(janela, width=20, text="Linha leve", font="MalgunGothic 9 bold", bg='white', command=linhaLeve)
+    bt2 = Button(janela, width=20, text="Linha pesada", font="MalgunGothic 9 bold", bg='white', command=linhaPesada)
+    bt3 = Button(janela, width=20, text="Motocicletas", font="MalgunGothic 9 bold", bg='white', command=motos)
+    bt4 = Button(janela,width = 20, text = "Voltar",font="MalgunGothic 9 bold", bg='white', command=orcamentos)
+    bt1.place(x=25, y=50)
+    bt2.place(x=25, y=90)
+    bt3.place(x = 25, y=130)
+    bt4.place(x =25, y = 170)
+    lb1.place(x=30, y=10)
+    janela.geometry('300x300+500+100')
+
+def deleteOrcamento():
+    print("deleteOrçamento")
+
+def updateUsuario():
+    print("updateUsuario")
+
+def deleteUsuario():
+    print("deleteUsuario")
+
+def linhaLeve():
+    print("linhaLeve")
+
+def linhaPesada():
+    print("linhaPesada")
+
+
+def motos():
+    print("Motos")
+
+global janela
+
+global janela
+
+janela = Tk()
+dashBoard()
+
+janela.mainloop()
