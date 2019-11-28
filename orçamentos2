@@ -1,0 +1,146 @@
+import tkinter as tk
+from tkinter import*
+from tkinter import ttk
+
+
+def atualiza_Modelo():
+    marca = comboMarcas.get()
+    modelos = []
+    if marca == "Honda":
+        modelos = ["Civic", "CRV", "HRV", "Fit", "City"]
+    elif marca == "Fiat":
+        modelos = ["Uno", "Palio", "Mobi", "Doblo", "Siena", "Strada"]
+    elif marca == "Volkswagen":
+        modelos = ["Gol","Up","Voyage","Fox","Golf","Saveiro"]
+    elif marca == "Chevrolet":
+        modelos = ["Celta","Classic","Corsa","Onix","Cruze"]
+    elif marca == "Toyota":
+        modelos = ["Corola","Etios","Hilux","SW4"]
+    comboModelo['values'] = modelos
+
+def atualiza_Ano():
+    ano = comboAno.get()
+
+    for i in range(2005, 2021):
+        anos.append(str(i))
+    comboAno['values'] = anos
+
+def main():
+    atualiza_Modelo()
+    atualiza_Ano()
+
+    marca = comboMarcas.get()
+    modelo = comboModelo.get()
+    ano = comboAno.get()
+
+    if modelo == "" or marca == "" or ano == "" or entrada.get == "":
+        print("preencha tudo")
+
+    else:
+        try:
+            var = float(entrada.get())
+            calcular(var,marca,modelo,ano)
+        except:
+            print("Digite um numero animal")
+
+
+def calcular(valor,marca,modelo,ano):
+    global janela
+    janela.destroy()
+    janela = Tk()
+    janela['bg'] = 'gray'
+    janela.geometry('270x230+500+100')
+    calc = valor * 0.04
+    calc2 = valor * 0.003
+    container = Frame(janela)
+    container.pack()
+    container2 = Frame(janela)
+    container2.pack()
+    container3 = Frame(janela)
+    container3.pack()
+    container4 = Frame(janela)
+    container4.pack()
+    container5 = Frame(janela)
+    container5.pack()
+
+    labelMarca = tk.Label(container,text="Marca:  ", font="MalgunGothic 9 bold", foreground="white", bg="gray")
+    labelMarca2 = tk.Label(container, text=marca, font="MalgunGothic 9 bold", foreground="white", bg="gray")
+
+    labelModelo = tk.Label(container2, text="Modelo:  ", font="MalgunGothic 9 bold", foreground="white", bg="gray")
+    labelModelo2 = tk.Label(container2, text=modelo, font="MalgunGothic 9 bold", foreground="white", bg="gray")
+
+    labelAno = tk.Label(container3, text="Ano:  ", font="MalgunGothic 9 bold", foreground="white", bg="gray")
+    labelAno2 = tk.Label(container3, text=ano, font="MalgunGothic 9 bold", foreground="white", bg="gray")
+
+    #melhorar calculo da taxa de acionamento
+    labelTaxaAcionamento = tk.Label(container4, text="Taxa de Acionamento:  R$", font="MalgunGothic 9 bold", foreground="white", bg="gray")
+    labelTaxaAcionamento2 = tk.Label(container4, text=calc, font="MalgunGothic 9 bold", foreground="white", bg="gray")
+
+    # melhorar calculo da mensalidade
+    labelMensalidade = tk.Label(container5, text="Mensalidade:  R$", font="MalgunGothic 9 bold", foreground="white", bg="gray")
+    labelMensalidade2 = tk.Label(container5, text=calc2 , font="MalgunGothic 9 bold", foreground="white", bg="gray")
+
+
+
+    labelTop = tk.Label(janela, text="Adicionais\n\n", font="MalgunGothic 9 bold", foreground="white", bg="gray")
+
+    labelMarca.pack(side=LEFT)
+
+    labelMarca2.pack(side=RIGHT)
+    labelModelo.pack(side=LEFT)
+    labelModelo2.pack(side=RIGHT)
+    labelAno.pack(side=LEFT)
+    labelAno2.pack(side=RIGHT)
+    labelTaxaAcionamento.pack(side=LEFT)
+    labelTaxaAcionamento2.pack(side=RIGHT)
+    labelMensalidade.pack(side=LEFT)
+    labelMensalidade2.pack(side=RIGHT)
+
+
+    btvoltar = Button(janela, width=8, text="Refazer", font="MalgunGothic 9 bold", bg='white', command=set_labels)
+    btvoltar.place(x=120,y=199)
+    btvoltar = Button(janela, width=8, text="Salvar", font="MalgunGothic 9 bold", bg='white', command=set_labels)
+    btvoltar.place(x=190,y=199)
+def set_labels(janela):
+    labelTop = tk.Label(janela, text="Escolha seu Modelo:", font="MalgunGothic 9 bold",foreground = "white", bg = "gray")
+    labelTop.place(x=20,y = 79)
+    labelTop = tk.Label(janela, text="Escolha o Ano do Modelo:", font="MalgunGothic 9 bold",foreground = "white", bg = "gray")
+    labelTop.place(x=20,y = 139)
+    labelTop = tk.Label(janela, text="Digite o Valor:", font="MalgunGothic 9 bold ",foreground = "white", bg = "gray")
+    labelTop.place(x=20,y = 199)
+    labelTop = tk.Label(janela, text="Escolha sua marca:", font="MalgunGothic 9 bold",foreground = "white", bg = "gray")
+    labelTop.place(x=20, y=19)
+
+    bt3 = Button(janela, width=5, text="OK", font="MalgunGothic 9 bold", bg='white', command=main)
+    bt3.place(x=250, y=270)
+
+    print(dict(comboMarcas))
+
+
+
+
+janela = tk.Tk()
+janela.geometry('300x300+500+100')
+janela['bg'] = 'gray'
+
+
+marcas = ["Fiat", "Honda", "Volkswagen", "Chevrolet","Toyota"]
+modelos = []
+anos = []
+
+comboMarcas = ttk.Combobox(janela, values=marcas)
+comboMarcas.place(x=20, y=40)
+comboMarcas.current(0)
+
+comboModelo = ttk.Combobox(janela, values=modelos)
+comboModelo.place(x=20, y=100)
+
+comboAno = ttk.Combobox(janela, values= anos)
+comboAno.place(x=20,y = 160)
+
+entrada = Entry(janela, bg='white', fg='black', font="MalgunGothic 9 bold", width='20', textvariable="Preço")
+entrada.place(x=20,y=220)
+
+set_labels(janela)
+
+janela.mainloop()
