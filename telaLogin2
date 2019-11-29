@@ -1,0 +1,140 @@
+from tkinter import *
+
+
+def login():
+    verificaSenha = 000
+    verificaUser = 'Nulo'
+    usuario = caixaUser.get()
+    senha = caixaSenha.get()
+    # recebe na entrada usuario e senha
+
+    # Conectando o BANCO liderPrev
+    conexao = sqlite3.connect('liderPrev.db')
+    cursor = conexao.cursor()
+
+    # VERIFICANDO SE A SENHA ESTÁ DENTRO DO BANCO
+
+    cursor.execute("""
+SELECT senha FROM usuario
+WHERE user = ?
+""", (usuario,))
+
+    x = cursor.fetchall()
+    if len(x) > 0:
+        verificaSenha = x[0][0]
+
+    cursor.execute("""
+  SELECT user FROM usuario
+  WHERE user = ?
+  """, (usuario,))
+
+    x = cursor.fetchall()
+    if len(x) > 0:
+        verificaUser = x[0][0]
+
+    if senha == verificaSenha and verificaUser == usuario:
+        print("senha Correta")
+    else:
+        print("senha e/ou usuario incorreto")
+
+def inserir(nomeCompleto,cpf,user,senha):
+    conexao = sqlite3.connect("liderPrev.db")
+    cursor = conexao.cursor()
+
+    cursor.execute("""INSERT INTO usuario (nome, cpf, user, senha) VALUES (?, ?, ?, ?)""",(nomeCompleto, cpf, user, senha))
+
+    janela2.mainloop()
+    # inserindo dados na tabela
+
+    # gravando no bd
+
+    conexao.commit()
+
+    print('Usuario cadastrado com sucesso!! ')
+
+    conexao.close()
+
+# SERVE PARA INSERIR DADOS NO BANCO DE DADOS DE CADASTRO
+def cadastro():
+    janela2 = Tk()
+    janela2.title("Cadastro Usuario")
+    janela2.geometry("300x300+50+50")
+
+    conn = sqlite3.connect('liderPrev.db')
+    cursor = conn.cursor()
+
+    labelNomeCompleto = Label(janela2, text="Nome Completo:")
+    labelNomeCompleto.pack()
+    caixaNomeCompleto = Entry(janela2)
+    caixaNomeCompleto.pack()
+    # nome = str(input("{:s}".format("Nome Completo: ",end="")))
+    labelUser = Label(janela2, text="Usuario:")
+    labelUser.pack()
+    caixaUser = Entry(janela2)
+    caixaUser.pack()
+    # usuario = str(input("{:s}".format("USUÁRIO: ",end="")))
+    labelSenha = Label(janela2, text="Senha:")
+    labelSenha.pack()
+    caixaSenha = Entry(janela2)
+    caixaSenha.pack()
+    # senha = getpass.getpass("SENHA: ")
+    labelCpf = Label(janela2, text="CPF:")
+    labelCpf.pack()
+    caixaCpf = Entry(janela2)
+    caixaCpf.pack()
+
+    nomeCompleto = caixaNomeCompleto.get()
+    cpf = caixaCpf.get()
+    user = caixaUser.get()
+    senha = caixaSenha.get()
+
+    butaoCadastrar = Button(janela2,text="Cadastrar")
+    butaoCadastrar.pack()
+    butaoCadastrar["command"] = inserir(nomeCompleto,cpf,user,senha)
+
+    # cpf = str(input("{:s}".format("CPF: ",end="")))
+    # CAIO gAY
+
+
+
+
+janela = Tk()
+janela.title("LiderPrev 1.0 ")
+
+labelUser = Label(janela, text="Usuario:")
+labelUser.pack()
+
+caixaUser = Entry(janela)
+caixaUser.pack()
+
+labelSenha = Label(janela, text="Senha:")
+labelSenha.pack()
+
+caixaSenha = Entry(janela)
+caixaSenha.pack()
+
+butaoEntrar = Button(janela, text="Entrar")
+butaoEntrar["command"] = login
+butaoEntrar.pack()
+
+labelSemCad = Label(janela, text="Não tem cadastro?")
+labelSemCad.pack()
+
+butaoCadastrar = Button(janela, text="Cadastrar-se")
+butaoCadastrar["command"] = cadastro
+butaoCadastrar.pack()
+
+janela.geometry("200x200+100+100")
+
+janela.mainloop()
+
+conexao = sqlite3.connect("liderPrev.db")
+cursor = conexao.cursor()
+
+# for i in range(20):
+#    cursor.execute("DELETE FROM usuario WHERE id = ?",(i,))
+
+cursor.execute("SELECT * FROM usuario")
+
+for i in cursor.fetchall():
+    print(i)
